@@ -1,0 +1,21 @@
+networks:
+  net1:
+services:
+  server:
+    build:
+      context: .
+      target: server_stage
+    container_name: host_s
+    hostname: host_s
+    networks:
+      - net1
+    command: /server :9000
+  client:
+    build:
+      context: .
+      target: client_stage
+    container_name: host_c
+    hostname: host_c
+    networks:
+      - net1
+    command: /client host_s:9000
